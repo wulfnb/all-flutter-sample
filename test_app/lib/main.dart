@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-
 import './question.dart';
+import './answer.dart';
+
 // void main() {
 //   runApp(MyApp());
 // }
@@ -9,7 +10,6 @@ import './question.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionSelected = 0;
 
-  void _answerQuestion(){
+  void _answerQuestion() {
     setState(() {
       _questionSelected = _questionSelected + 1;
     });
@@ -27,22 +27,28 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var questions = [
-      "What is your name ?",
-      "What is your favourive colour ?"
+      {
+        "questionText": "What is your name ?",
+        "answers": ["A", "B", "C", "D"]
+      },
+      {
+        "questionText": "What is your favourive colour ?",
+        "answers": ["Red", "Green", "Blue"]
+      },
     ];
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: Text("My firstTest App"),
-          ),
-          body: Column(
-            children: [
-              Question(questions.elementAt(_questionSelected)),
-              RaisedButton(child: Text("Answer 1"), onPressed: _answerQuestion,),
-              RaisedButton(child: Text("Answer 2"), onPressed: _answerQuestion,),
-              RaisedButton(child: Text("Answer 3"), onPressed: _answerQuestion,)
-            ],
-          ),
+      appBar: AppBar(
+        title: Text("My firstTest App"),
+      ),
+      body: Column(
+        children: [
+          Question(questions[_questionSelected]['questionText'].toString()),
+          ...(questions[_questionSelected]['answers'] as List<String>).map((answer) {
+            return Answer(_answerQuestion, answer);
+          }).toList()
+        ],
+      ),
     ));
   }
 }
