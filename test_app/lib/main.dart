@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+import './question.dart';
 // void main() {
 //   runApp(MyApp());
 // }
@@ -9,17 +11,17 @@ void main() => runApp(MyApp());
 class MyApp extends StatefulWidget {
 
   @override
-  MyAppState createState() => MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyAppState extends State<MyApp> {
-  var questionSelected = 0;
+class _MyAppState extends State<MyApp> {
+  var _questionSelected = 0;
 
-  void answerQuestion(){
+  void _answerQuestion(){
     setState(() {
-      questionSelected = questionSelected + 1;
+      _questionSelected = _questionSelected + 1;
     });
-    print(questionSelected);
+    print(_questionSelected);
   }
 
   @override
@@ -35,10 +37,10 @@ class MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Text(questions.elementAt(questionSelected)),
-              RaisedButton(child: Text("Answer 1"), onPressed: answerQuestion,),
-              RaisedButton(child: Text("Answer 2"), onPressed: answerQuestion,),
-              RaisedButton(child: Text("Answer 3"), onPressed: answerQuestion,)
+              Question(questions.elementAt(_questionSelected)),
+              RaisedButton(child: Text("Answer 1"), onPressed: _answerQuestion,),
+              RaisedButton(child: Text("Answer 2"), onPressed: _answerQuestion,),
+              RaisedButton(child: Text("Answer 3"), onPressed: _answerQuestion,)
             ],
           ),
     ));
