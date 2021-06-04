@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+
+import './quiz.dart';
+import './result.dart';
 
 // void main() {
 //   runApp(MyApp());
 // }
-// 23
+// next 42
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -21,34 +22,33 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionSelected = _questionSelected + 1;
     });
-    print(_questionSelected);
   }
+
+  final _questions = const [
+    {
+      "questionText": "Your name start with ?",
+      "answers": ["A", "B", "C", "D", "Other"]
+    },
+    {
+      "questionText": "What is your favourive colour ?",
+      "answers": ["Red", "Green", "Blue"]
+    },
+    {
+      "questionText": "You are from ?",
+      "answers": ["City", "Town", "Village"]
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      {
-        "questionText": "What is your name ?",
-        "answers": ["A", "B", "C", "D"]
-      },
-      {
-        "questionText": "What is your favourive colour ?",
-        "answers": ["Red", "Green", "Blue"]
-      },
-    ];
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
         title: Text("My firstTest App"),
       ),
-      body: Column(
-        children: [
-          Question(questions[_questionSelected]['questionText'].toString()),
-          ...(questions[_questionSelected]['answers'] as List<String>).map((answer) {
-            return Answer(_answerQuestion, answer);
-          }).toList()
-        ],
-      ),
+      body: _questionSelected < _questions.length
+          ? Quiz(quizIndex: _questionSelected, questions: _questions, selectHandler: _answerQuestion)
+          : Result(),
     ));
   }
 }
