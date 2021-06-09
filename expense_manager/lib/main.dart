@@ -21,6 +21,8 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
               child: Card(
@@ -30,6 +32,7 @@ class MyHomePage extends StatelessWidget {
               width: double.infinity,
             ),
             Card(
+              color: Colors.red,
               child: Text('Transactions'),
             )
           ],
